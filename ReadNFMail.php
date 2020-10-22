@@ -1,27 +1,42 @@
 <?php
+require_once 'classes/creators/ReaderCreator.php';
+require_once 'classes/creators/FileReaderCreator.php';
+require_once 'classes/creators/MailReaderCreator.php';
+
+require_once 'interfaces/Reader.php';
+require_once 'classes/FileReader.php';
+require_once 'classes/MailReader.php';
+require_once 'classes/ApiClient.php';
+require_once 'classes/Payment.php';
+
+require_once 'classes/exception/PaymentException.php';
+
 
 use classes\ApiClient;
 use classes\creators\ReaderCreator;
 use classes\creators\MailReaderCreator;
 use classes\creators\FileReaderCreator;
 
-$apiAddr  = "http://localhost:8000/processar";
 //$path     = "{imap.ethereal.mail:993/imap/tls/novalidade-cert}";
 //$user     = 'arnulfo31@ethereal.email';
 //$password = 'wt77saK6G4CJj1rtSh';
-$path     = __DIR__ . "/test/mail/";
+
+$options  = getopt("p:a:u::w::");
 
 
-function processar (ReaderCreator $creator) {
-    $api  = new ApiClient('http://localhost/process');
+$apiAddr  = $options['a'];
+$path     = $options['p'];
+$user     = $options['u'];
+$password = $options['w'];
+
+function processar (ReaderCreator $creator, string $apiAddr) {
+    $api  = new ApiClient($apiAddr);
     foreach ($creator->readAll() as $pay) {
-        $api->sendPayment($pay['payment']);
-        $status = $api->getStatus();
-        if ($status == 200) {
+        try {
+            $api->sendPayment($pay['payment']);
             $creator->processed($pay['id']);
-        } else {
-            echo "Erro de API: " . $status . "\n";
-            echo "O pagamento não pôde ser processado.\n";
+        } catch (Exception $ex) {
+            echo "Erro: Pagamento não pôde ser processado. (" . $ex->getMessage() . ")";
         }
     }
 }
