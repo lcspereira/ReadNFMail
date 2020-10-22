@@ -2,6 +2,7 @@
 namespace classes;
 
 require_once __DIR__ . '/../interfaces/Reader.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use interfaces\Reader;
 
@@ -71,6 +72,11 @@ class MailReader implements Reader {
      * @see \interfaces\Reader::processed()
      */
     public function processed(int $id) : bool {
-        return $this->mailHandler->markMailAsRead($id);
+        try {
+            $this->mailHandler->markMailAsRead($id);
+            return true;
+        } catch (\PhpImap\Exceptions\ConnectionException | \PhpImap\Exceptions\InvalidParameterException $ex) {
+            return false;
+        }
     }
 }
