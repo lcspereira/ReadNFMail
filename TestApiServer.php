@@ -1,4 +1,14 @@
 <?php
+/**********************************************************
+ * TestApiServer
+ **********************************************************
+ * API para testes do ReadNFMail.
+ *
+ * Recebe requisição, instancia o objeto  do pagamento 
+ * e faz verificação dos campos.
+ * 
+ * @author: Lucas Pereira (lucas.pereira6c@gmail.com)
+ **********************************************************/
 
 require __DIR__ . "/vendor/autoload.php";
 require __DIR__ . "/classes/Payment.php";
@@ -11,6 +21,12 @@ use classes\Payment;
 $app = AppFactory::create();
 $app->addErrorMiddleware(true, true, true);
 
+/**
+ * POST /process
+ * 
+ * Recebe o objeto Payment, e efetua verificação
+ * dos atributos. 
+ */
 $app->post('/process', function (Request $request, Response $response, $args) {
     $pay = null;
     try {

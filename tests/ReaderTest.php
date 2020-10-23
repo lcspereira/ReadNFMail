@@ -1,4 +1,11 @@
 <?php
+/**********************************************************
+ * ReaderTest
+ **********************************************************
+ * Teste dos objetos leitores de mensagens.
+ *
+ * @author: Lucas Pereira (lucas.pereira6c@gmail.com)
+ **********************************************************/
 
 require_once __DIR__ . "/../classes/creators/FileReaderCreator.php";
 require_once __DIR__ . "/../classes/creators/MailReaderCreator.php";
@@ -17,8 +24,11 @@ use classes\FileReader;
 use classes\creators\ReaderCreator;
 
 class ReaderTest extends TestCase {
+    /**
+     * Testa criação do objeto FileReader através do factory method.
+     */
     public function testFileReaderInstantiation () : void {
-        $path = getenv('TEST_MAILPATH');
+        $path = getenv('TEST_MAILPATH_DIR');
         
         if (!$path) {
             $path = "./test/";
@@ -28,6 +38,9 @@ class ReaderTest extends TestCase {
         $this->assertInstanceOf(FileReader::class, $creator->getReader());
     }
     
+    /**
+     * Testa criação do objeto MailReader através do factory method
+     */
     public function testMailReaderInstantiation () : void {
         $path     = getenv('TEST_MAILPATH');
         $user     = getenv('TEST_MAILUSER');
@@ -47,7 +60,10 @@ class ReaderTest extends TestCase {
         $this->assertInstanceOf(MailReader::class, $creator->getReader());
     }
     
-    
+    /**
+     * Teste de leitura de mensagens e instanciação do objeto Payment
+     * por meio de processamento de mensagem em arquivo.
+     */
     public function testFileReaderExec () : void {
         $path = getenv('TEST_MAILPATH_DIR');
         if ($path) {
@@ -66,6 +82,10 @@ class ReaderTest extends TestCase {
         }
     }
     
+    /**
+     * Teste de leitura de mensagens e instanciação do objeto Payment
+     * por meio de processamento de mensagem em email.
+     */
     public function testMailReaderExec () : void {
         $path     = getenv('TEST_MAILPATH');
         $user     = getenv('TEST_MAILUSER');
