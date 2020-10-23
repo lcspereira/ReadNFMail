@@ -1,12 +1,4 @@
 <?php
-/**********************************************************
- * ApiTest
- **********************************************************
- * Teste de envio do objeto Payment para API REST.
- *
- * @author: Lucas Pereira (lucas.pereira6c@gmail.com)
- **********************************************************/
-
 require_once __DIR__ . "/../classes/ApiClient.php";
 require_once __DIR__ . "/../classes/Payment.php";
 
@@ -14,6 +6,12 @@ use PHPUnit\Framework\TestCase;
 use classes\ApiClient;
 use classes\Payment;
 
+/**
+ * Teste de envio do objeto Payment para API REST.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com)
+ *
+ */
 class ApiTest extends TestCase {
     /**
      * Testa o processamento da mensagem e envio para a API.

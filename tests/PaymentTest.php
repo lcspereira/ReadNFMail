@@ -1,20 +1,17 @@
 <?php
-/**********************************************************
- * PaymentTest
- **********************************************************
- * Teste de processamento de mensagem e instanciamento do
- * objeto Payment através da mesma.
- *
- * @author: Lucas Pereira (lucas.pereira6c@gmail.com)
- **********************************************************/
-
-
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../classes/Payment.php";
 
 use PHPUnit\Framework\TestCase;
 use classes\Payment;
 
+/**
+ * Teste de processamento de mensagem e instanciamento do
+ * objeto Payment através da mesma.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com)
+ *
+ */
 final class PaymentTest extends TestCase {
     /**
      * Cria o objeto de pagamento processando a mensagem

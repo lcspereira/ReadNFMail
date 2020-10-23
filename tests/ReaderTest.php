@@ -1,12 +1,4 @@
 <?php
-/**********************************************************
- * ReaderTest
- **********************************************************
- * Teste dos objetos leitores de mensagens.
- *
- * @author: Lucas Pereira (lucas.pereira6c@gmail.com)
- **********************************************************/
-
 require_once __DIR__ . "/../classes/creators/FileReaderCreator.php";
 require_once __DIR__ . "/../classes/creators/MailReaderCreator.php";
 require_once __DIR__ . "/../classes/MailReader.php";
@@ -23,6 +15,12 @@ use classes\Payment;
 use classes\FileReader;
 use classes\creators\ReaderCreator;
 
+/**
+ * Teste dos objetos leitores de mensagens.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com)
+ *
+ */
 class ReaderTest extends TestCase {
     /**
      * Testa criação do objeto FileReader através do factory method.
