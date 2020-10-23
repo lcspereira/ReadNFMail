@@ -1,4 +1,5 @@
 <?php
+
 namespace classes;
 
 require_once __DIR__ . '/../interfaces/Reader.php';
@@ -7,7 +8,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use interfaces\Reader;
 
 
-
+/**
+ * Le informações de pagamento de mensagens de e-mail,
+ * e os carrega para API REST.
+ * 
+ * @author lucas
+ *
+ */
 class MailReader implements Reader {
     private $path;
     private $user;

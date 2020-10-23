@@ -5,6 +5,13 @@ namespace classes;
 use JsonSerializable;
 use classes\exception\PaymentException;
 
+/**
+ * Le informações de pagamento de mensagens de e-mail,
+ * e os carrega para API REST.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com)
+ *
+ */
 class Payment implements JsonSerializable {
     private $nome;
     private $endereco;
@@ -12,7 +19,14 @@ class Payment implements JsonSerializable {
     private $vencimento;
     private $nf;
 
-    
+    /**
+     * 
+     * @param string $nome
+     * @param string $endereco
+     * @param string $valor
+     * @param string $vencimento
+     * @param string $nf
+     */
     public function __construct(string $nome, string $endereco, string $valor, string $vencimento, string $nf) {
         $this->nome       = $nome;
         $this->endereco   = $endereco;
@@ -20,6 +34,87 @@ class Payment implements JsonSerializable {
         $this->vencimento = $vencimento;
         $this->nf         = base64_encode($nf);
     }
+    
+    /**
+     * @return string
+     */
+    public function getNome() {
+        return $this->nome;
+    }
+    
+    
+    /**
+     * @param string $nome
+     */
+    public function setNome($nome) {
+        $this->nome = $nome;
+        
+    }
+    
+    
+    /**
+     * @return string
+     */
+    public function getEndereco() {
+        return $this->endereco;
+    }
+    
+    
+    /**
+     * @param string $endereco
+     */
+    public function setEndereco($endereco){
+        $this->endereco = $endereco;
+    }
+    
+    
+    /**
+     * @return number
+     */
+    public function getValor() {
+        return $this->valor;
+    }
+    
+    /**
+     * @param number $valor
+     */
+    public function setValor($valor) {
+        $this->valor = $valor;
+        
+    }
+    
+    
+    /**
+     * @return string
+     */
+    public function getVencimento() {
+        return $this->vencimento;
+    }
+    
+    
+    /**
+     * @param string $vencimento
+     */
+    public function setVencimento($vencimento) {
+        $this->vencimento = $vencimento;
+    }
+    
+    
+    /**
+     * @return string
+     */
+    public function getNF () {
+        return base64_decode($this->nf);
+    }
+    
+    
+    /**
+     * @param string $nf
+     */
+    public function setNF($nf) {
+        $this->nf = base64_encode($nf);
+    }
+    
     
     /**
      * Instancia o objeto pagamento utilizando o texto das mensagens.
@@ -37,87 +132,6 @@ class Payment implements JsonSerializable {
         
         $payment    = new Payment($nome, $endereco, $valor, $vencimento, $nf);
         return $payment;
-    }
-
-    
-    /**
-     * @return string
-     */
-    public function getNome() {
-        return $this->nome;
-    }
-
-    
-    /**
-     * @param string $nome
-     */
-    public function setNome($nome) {
-        $this->nome = $nome;
-
-    }
-
-    
-    /**
-     * @return string
-     */
-    public function getEndereco() {
-        return $this->endereco;
-    }
-
-    
-    /**
-     * @param string $endereco
-     */
-    public function setEndereco($endereco){
-        $this->endereco = $endereco;
-    }
-
-    
-    /**
-     * @return number
-     */
-    public function getValor() {
-        return $this->valor;
-    }
-
-    /**
-     * @param number $valor
-     */
-    public function setValor($valor) {
-        $this->valor = $valor;
-
-    }
-
-    
-    /**
-     * @return string
-     */
-    public function getVencimento() {
-        return $this->vencimento;
-    }
-
-    
-    /**
-     * @param string $vencimento
-     */
-    public function setVencimento($vencimento) {
-        $this->vencimento = $vencimento;
-    }
-
-    
-    /**
-     * @return string
-     */
-    public function getNF () {
-        return base64_decode($this->nf);
-    }
-
-    
-    /**
-     * @param string $nf
-     */
-    public function setNF($nf) {
-        $this->nf = base64_encode($nf);
     }
 
     
@@ -160,6 +174,10 @@ class Payment implements JsonSerializable {
         ];
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function __toString() {
         $str = "Nome: " . $this->nome . "\n";
         $str .= "Endereço: " . $this->endereco . "\n";

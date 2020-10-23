@@ -3,6 +3,12 @@ namespace  classes\exception;
 
 use Exception;
 
+/**
+ * Exceçao de pagamento.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com
+ *
+ */
 class PaymentException extends Exception {
     /**
      * Exceção para tratar os erros da classe pagamento.

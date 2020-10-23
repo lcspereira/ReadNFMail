@@ -1,5 +1,4 @@
 <?php
-
 namespace classes;
 
 require_once  __DIR__ . '/../interfaces/Reader.php';
@@ -7,13 +6,46 @@ require_once  __DIR__ . '/../interfaces/Reader.php';
 use interfaces\Reader;
 use classes\exception\PaymentException;
 
+
+/**
+ * Classe para leitura e processamento de mensagens em
+ * arquivos.
+ *
+ * Este leitor foi utilizado para testes, 
+ * mas também pode ser utilizado caso se utilize
+ * outro processo para efetuar download dos e-mails.
+ * 
+ * @author Lucas Pereira (lucas.pereira6c@gmail.com)
+ *
+ */
 class FileReader implements Reader {
-    
     private $path;
     
+    /**
+     * 
+     * @param string $path
+     */
     public function __construct(string $path) {
         $this->path = $path;
     }
+    
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+    
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+    
+    
     /**
      * {@inheritDoc}
      * @see \interfaces\Reader::read()
