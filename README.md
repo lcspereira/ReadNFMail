@@ -1,4 +1,9 @@
 # ReadNFMail
+
+## Instalação:
+
+composer install
+
 ## Execução:
 
 ### Local:
@@ -19,6 +24,9 @@ TEST_MAILPATH=< string de conexão >
 TEST_MAILUSER=< email >  
 TEST_MAILPASSWORD=< senha >  
 
-## String de conexão com servidor de email
+## String de conexão com servidor de email:
 A string de conexão com o servidor de email deve ser escrita no formato que é utilizado na função imap_open do PHP.  
 Para mais informações, acesse https://www.php.net/manual/en/function.imap-open.php.
+
+## API de testes:
+php -S < endereço >:< porta > TestApiServer.php
