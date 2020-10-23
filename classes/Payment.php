@@ -38,7 +38,7 @@ class Payment implements JsonSerializable {
     /**
      * @return string
      */
-    public function getNome() {
+    public function getNome() : string {
         return $this->nome;
     }
     
@@ -46,7 +46,7 @@ class Payment implements JsonSerializable {
     /**
      * @param string $nome
      */
-    public function setNome($nome) {
+    public function setNome(string $nome) : void {
         $this->nome = $nome;
         
     }
@@ -55,7 +55,7 @@ class Payment implements JsonSerializable {
     /**
      * @return string
      */
-    public function getEndereco() {
+    public function getEndereco() : string {
         return $this->endereco;
     }
     
@@ -63,22 +63,22 @@ class Payment implements JsonSerializable {
     /**
      * @param string $endereco
      */
-    public function setEndereco($endereco){
+    public function setEndereco(string $endereco) : void{
         $this->endereco = $endereco;
     }
     
     
     /**
-     * @return number
+     * @return string
      */
-    public function getValor() {
+    public function getValor() : string {
         return $this->valor;
     }
     
     /**
      * @param number $valor
      */
-    public function setValor($valor) {
+    public function setValor(string $valor) : void {
         $this->valor = $valor;
         
     }
@@ -87,7 +87,7 @@ class Payment implements JsonSerializable {
     /**
      * @return string
      */
-    public function getVencimento() {
+    public function getVencimento() : string {
         return $this->vencimento;
     }
     
@@ -95,7 +95,7 @@ class Payment implements JsonSerializable {
     /**
      * @param string $vencimento
      */
-    public function setVencimento($vencimento) {
+    public function setVencimento(string $vencimento) : void {
         $this->vencimento = $vencimento;
     }
     
@@ -103,7 +103,7 @@ class Payment implements JsonSerializable {
     /**
      * @return string
      */
-    public function getNF () {
+    public function getNF () : string {
         return base64_decode($this->nf);
     }
     
@@ -111,7 +111,7 @@ class Payment implements JsonSerializable {
     /**
      * @param string $nf
      */
-    public function setNF($nf) {
+    public function setNF(string $nf) : void {
         $this->nf = base64_encode($nf);
     }
     
@@ -123,13 +123,12 @@ class Payment implements JsonSerializable {
      * @param string $nf
      * @return Payment
      */
-    public static function parsePaymentFromMail ($msg, $nf) {
+    public static function parsePaymentFromMail (string $msg, string $nf) : Payment {
         $msgArr     = explode ("\n", $msg);
-        $nome       = explode(": ", preg_grep('/^[Nn]ome:/', $msgArr)[2])[1];
-        $endereco   = explode(": ", preg_grep('/^[Ee]ndereço:/', $msgArr)[3])[1];
-        $valor      = explode(": ", preg_grep('/^[Vv]alor:/', $msgArr)[4])[1];
-        $vencimento = explode(": ", preg_grep('/^[Vv]encimento:/', $msgArr)[5])[1];
-        
+        $nome       = explode(": ", current(preg_grep('/^[Nn]ome:/', $msgArr)))[1];
+        $endereco   = explode(": ", current(preg_grep('/^[Ee]ndereço:/', $msgArr)))[1];
+        $valor      = explode(": ", current(preg_grep('/^[Vv]alor:/', $msgArr)))[1];
+        $vencimento = explode(": ", current(preg_grep('/^[Vv]encimento:/', $msgArr)))[1];
         $payment    = new Payment($nome, $endereco, $valor, $vencimento, $nf);
         return $payment;
     }
@@ -138,10 +137,10 @@ class Payment implements JsonSerializable {
     /**
      * Validação do objeto Payment.
      * 
-     * @return number
+     * @return int
      * @throws PaymentException
      */
-    public function checkFields() {
+    public function checkFields() : int {
         $errMsgTemplate = "Valor não encontrado: ";
 
         if (!$this->nome) {
@@ -164,7 +163,7 @@ class Payment implements JsonSerializable {
      * {@inheritDoc}
      * @see JsonSerializable::jsonSerialize()
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
         return [
             'nome'       => $this->nome,
             'endereco'   => $this->endereco,
@@ -178,14 +177,12 @@ class Payment implements JsonSerializable {
      * 
      * @return string
      */
-    public function __toString() {
-        $str = "Nome: " . $this->nome . "\n";
+    public function __toString() : string  {
+        $str  = "Nome: " . $this->nome . "\n";
         $str .= "Endereço: " . $this->endereco . "\n";
         $str .= "Valor: " . $this->valor . "\n";
         $str .= "Vencimento: " . $this->vencimento . "\n";
-        $str .= "Nota (base64): " . $this->nf . "\n"; 
-        //$str .= "Tamanho da nota fiscal: " .  + "\n";
-        strlen($this->getNF());
+        $str .= "Tamanho da nota: " . strlen(base64_decode($this->nf)) . "\n";
         
         return $str;
     }
