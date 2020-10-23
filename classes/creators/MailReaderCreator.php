@@ -35,7 +35,7 @@ class MailReaderCreator extends ReaderCreator {
      * {@inheritDoc}
      * @see \classes\creators\ReaderCreator::getReader()
      */
-    public function getReader(): Reader {
+    public function getReader() : Reader {
         return new MailReader($this->path, $this->user, $this->password);
     }
 }

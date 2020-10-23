@@ -32,16 +32,14 @@ class FileReader implements Reader {
     /**
      * @return string
      */
-    public function getPath()
-    {
+    public function getPath() : string {
         return $this->path;
     }
     
     /**
      * @param string $path
      */
-    public function setPath($path)
-    {
+    public function setPath($path) : void{
         $this->path = $path;
     }
     

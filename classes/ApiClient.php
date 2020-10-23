@@ -38,14 +38,14 @@ class ApiClient {
     /**
      * @param string $url
      */
-    public function setUrl($url) {
+    public function setUrl($url) : void {
         $this->url = $url;
     }
 
     /**
      * @param mixed $status
      */
-    public function setStatus(int $status) {
+    public function setStatus(int $status) : void {
         $this->status = $status;
     }
 
@@ -56,7 +56,7 @@ class ApiClient {
      * @param Payment $pay
      * @throws Exception
      */
-    public function sendPayment(Payment $pay) {
+    public function sendPayment(Payment $pay) : void {
         $webError = false;
 
         try {

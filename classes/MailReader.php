@@ -6,6 +6,8 @@ require_once __DIR__ . '/../interfaces/Reader.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use interfaces\Reader;
+use PhpImap;
+use PhpImap\Mailbox;
 
 
 /**
@@ -20,6 +22,8 @@ class MailReader implements Reader {
     private $user;
     private $password;
     private $mailHandler;
+
+    
 
     /**
      * @param string $path
@@ -38,6 +42,62 @@ class MailReader implements Reader {
      */
     public function __destruct() {
         $this->mailHandler->disconnect();
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPath() : string {
+        return $this->path;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUser() : string {
+        return $this->user;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPassword() : string {
+        return $this->password;
+    }
+    
+    /**
+     * @return \PhpImap\Mailbox
+     */
+    public function getMailHandler() : Mailbox {
+        return $this->mailHandler;
+    }
+    
+    /**
+     * @param string $path
+     */
+    public function setPath($path) : void{
+        $this->path = $path;
+    }
+    
+    /**
+     * @param string $user
+     */
+    public function setUser($user) : void {
+        $this->user = $user;
+    }
+    
+    /**
+     * @param string $password
+     */
+    public function setPassword($password) : void {
+        $this->password = $password;
+    }
+    
+    /**
+     * @param \PhpImap\Mailbox $mailHandler
+     */
+    public function setMailHandler($mailHandler) : void {
+        $this->mailHandler = $mailHandler;
     }
 
     /**

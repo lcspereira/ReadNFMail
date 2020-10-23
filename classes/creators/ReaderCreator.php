@@ -21,16 +21,16 @@ abstract class ReaderCreator {
     abstract public function getReader() : Reader;
     
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPath() {
+    public function getPath() : string {
         return $this->path;
     }
 
     /**
-     * @param mixed $path
+     * @param string $path
      */
-    public function setPath($path) {
+    public function setPath($path) : void {
         $this->path = $path;
     }
     
