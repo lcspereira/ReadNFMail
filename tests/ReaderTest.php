@@ -69,7 +69,7 @@ class ReaderTest extends TestCase {
             $pays = $arq->readAll();
             
             if (count($pays) == 0) {
-                echo "(" . __FUNCTION__ . ") Aviso: Não há mensagens a serem processadas.";
+                echo "(" . __FUNCTION__ . ") Aviso: Não há mensagens a serem processadas.\n";
             }
             
             foreach ($pays as $p) {
@@ -94,7 +94,7 @@ class ReaderTest extends TestCase {
             $pays = $mrc->readAll();
             
             if (count($pays) == 0) {
-                echo "(" . __FUNCTION__ . ") Aviso: Não há mensagens a serem processadas.";
+                echo "(" . __FUNCTION__ . ") Aviso: Não há mensagens a serem processadas.\n";
             }
             
             foreach ($pays as $p) {
